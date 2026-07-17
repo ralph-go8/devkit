@@ -9,6 +9,41 @@ import { ToolbarKebab } from "./toolbar/ToolbarKebab";
 import { ToolbarKebabItem } from "./toolbar/ToolbarKebabItem";
 import { Toolbar } from "./toolbar/Toolbar";
 
+const login = async () => {
+  const res = await fetch("https://jelly.onepclc.com/api/common-users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: "raf2@gmail.com",
+      password: "raf2@gmail.com",
+    }),
+  });
+
+  const json = await res.json();
+
+  console.log("login/", json);
+};
+const me = async () => {
+  const res = await fetch("https://jelly.onepclc.com/api/common-users/me", {
+    // method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const json = await res.json();
+
+  console.log("me/", json);
+};
+(async () => {
+  // await me();
+  await login();
+  await me();
+})();
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <div className="mx-auto mt-[33vh] max-w-[75vw] ">
